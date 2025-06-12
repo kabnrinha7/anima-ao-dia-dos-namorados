@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Amor em Terminal</title>
+  <style>
+    body {
+      background-color: black;
+      color: #00ff00;
+      font-family: monospace;
+      padding: 20px;
+    }
+    #terminal {
+      white-space: pre-wrap;
+      font-size: 16px;
+    }
+    #heart, #kiss, #finalText, #musicNote {
+      display: none;
+      font-size: 24px;
+      margin-top: 20px;
+      text-align: center;
+    }
+    button {
+      padding: 10px 20px;
+      font-family: monospace;
+      margin-bottom: 20px;
+      cursor: pointer;
+      background-color: #222;
+      color: #0f0;
+      border: 1px solid #0f0;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="startBtn">Iniciar Animação</button>
+  <div id="terminal"></div>
+  <div id="heart">❤️‍🔥</div>
+  <div id="kiss">👩‍❤️‍👨</div>
+  <div id="finalText"></div>
+  <div id="musicNote">🎵 Música: "Zero a Dez" – Luan Santana & Ivete Sangalo 🎵</div>
+
+  <script>
+    const terminal = document.getElementById("terminal");
+    const heart = document.getElementById("heart");
+    const kiss = document.getElementById("kiss");
+    const finalText = document.getElementById("finalText");
+    const musicNote = document.getElementById("musicNote");
+
+    const lines = [
+      "havia um menino torto...",
+      "andava numa casa torta...",
+      "sua vida era torta...",
+      "um dia o menininho torto...",
+      "JULLY encontrou...",
+      "e tudo que era torto...",
+      "JESUS endireitou 🥹",
+      "",
+      "e com ela tudo mudou...",
+      "a vida ficou leve, bonita, cheia de sonhos...",
+      "",
+      "e agora, nada faz sentido sem ela.",
+      "meu amor, minha parceira, meu futuro 💍",
+      "",
+      "prepare-se... porque...",
+    ];
+
+    const finalMessage = `
+amor como diz nesse texto, eu era todo torto e sem rumo nenhum na vida.
+e eu sempre me vi muito nessa musiquinha kkkk:
+
+"havia um menino torto, andava numa casa torta, sua vida era torta,
+um dia o menininho torto, a bíblia encontrou. E tudo que era torto,
+jesus endireitou."
+
+kkkk isso sempre fez sentido pra mim, pq sempre fui todo errado,
+e tenho certeza que Deus te enviou pra mim, pra vc me endireitar
+e assim você fez.
+
+você me mudou da água pro vinho, me faz ser melhor a cada dia,
+pq com você eu tenho sonhos e planos, por você eu quero ter uma família,
+por você eu quero conquistar o mundo...
+
+enfim, só pra dizer que Jesus te enviou pra me consertar e eu tenho total
+certeza disso. sem você eu não estaria onde estou hoje.
+
+obrigado por tudo. mais um dia dos namorados...
+em breve será dia de casados kkkk ❤️
+
+eu te amo infinitamente amor! obrigado Deus pela MINHA mulher! 🙏
+`;
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function typeLine(text) {
+      for (let char of text) {
+        terminal.textContent += char;
+        await sleep(50);
+      }
+      terminal.textContent += '\n';
+    }
+
+    async function run() {
+      for (let line of lines) {
+        await typeLine(line);
+        await sleep(500);
+      }
+
+      heart.style.display = "block";
+      await sleep(1000);
+      kiss.style.display = "block";
+      await sleep(1000);
+
+      finalText.style.display = "block";
+      finalText.textContent = "";
+      for (let char of finalMessage) {
+        finalText.textContent += char;
+        await sleep(20);
+      }
+
+      musicNote.style.display = "block";
+    }
+
+    document.getElementById("startBtn").onclick = () => {
+      document.getElementById("startBtn").disabled = true;
+      run();
+    };
+  </script>
+
+</body>
+</html>
